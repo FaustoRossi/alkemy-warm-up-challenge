@@ -1,18 +1,16 @@
 import React from "react";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import LogIn from "./LogIn";
-// import Home from "./Home";
+import Home from "./Home";
+import axios from "axios";
 
 function App() {
   return (
-    <LogIn />
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" exact component={LogIn} />
+    <BrowserRouter>
+      <Route path="/" exact component={LogIn} />
 
-    //     <Route path="/home" component={Home} />
-    //   </Routes>
-    // </BrowserRouter>
+      <Route path="/home" component={Home} />
+    </BrowserRouter>
   );
 }
 

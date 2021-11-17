@@ -2,16 +2,17 @@ import { Formik, Field, ErrorMessage, Form } from "formik";
 import React, { useEffect, useState } from "react";
 import { Button, Container, Row, Col, Image } from "react-bootstrap";
 import ErrorMsg from "./ErrorMsg";
+import axios from "axios";
 
 import catProfile from "../assets/cat-profile.png";
 import security from "../assets/security.png";
 
 function LogIn() {
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     window.location.assign("/home");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      window.location.assign("/home");
+    }
+  }, []);
   return (
     <>
       <Formik
@@ -30,6 +31,20 @@ function LogIn() {
           }
 
           return error;
+        }}
+        onSubmit={(values) => {
+          console.log("sent");
+          axios
+            .post("http://challenge-react.alkemy.org", values)
+            .then((res) => {
+              console.log(res.data.token);
+              localStorage.setItem("token", res.data.token);
+              window.location.assign("/home");
+            })
+            .catch((err) => {
+              alert("Incorrect Data");
+              console.log(err);
+            });
         }}
       >
         {({ errors }) => (
