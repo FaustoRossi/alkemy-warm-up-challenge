@@ -33,7 +33,7 @@ function LogIn() {
           return error;
         }}
         onSubmit={(values) => {
-          console.log("sent");
+          console.log("enviado");
           axios
             .post("http://challenge-react.alkemy.org", values)
             .then((res) => {

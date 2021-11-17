@@ -1,27 +1,22 @@
-import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import PostList from "./PostList";
+import Loading from "./Loading";
+import axios from "axios";
+import NavvBar from "./NavvBar";
 
 function Home() {
+  const [post, setPost] = useState(null);
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
+      console.log(res.data);
+      setPost(res.data);
+    });
+  });
+
   return (
     <div>
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand href="#home">Catnip Inc.™</Navbar.Brand>
-          <Nav variant="tabs" defaultActiveKey="/home">
-            <Nav.Item className="mx-2">
-              <Link to="/home" className="nav-link">
-                Home
-              </Link>
-            </Nav.Item>
-            <Nav.Item className="mx-2">
-              <Link to="/postcreate" className="nav-link">
-                Create a Post
-              </Link>
-            </Nav.Item>
-          </Nav>
-        </Container>
-      </Navbar>
+      <NavvBar />
+      {post ? <PostList titles={post} /> : <Loading />}
     </div>
   );
 }
