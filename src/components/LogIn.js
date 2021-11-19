@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Button, Container, Row, Col, Image } from "react-bootstrap";
 import ErrorMsg from "./ErrorMsg";
 import axios from "axios";
-
+import Swal from "sweetalert2";
 import catProfile from "../assets/cat-profile.png";
 import security from "../assets/security.png";
 
@@ -39,7 +39,16 @@ function LogIn() {
             .then((res) => {
               console.log(res.data.token);
               localStorage.setItem("token", res.data.token);
-              window.location.assign("/home");
+              setTimeout(() => {
+                window.location.assign("/home");
+              }, 2000);
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Log In successful",
+                showConfirmButton: false,
+                timer: 1500,
+              });
             })
             .catch((err) => {
               alert("Incorrect Data");
