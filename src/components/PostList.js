@@ -2,12 +2,12 @@ import React from "react";
 
 import PostItem from "./PostItem";
 
-function TitleList({ titles, bodies }) {
-  const renderedList = titles.map((title) => {
-    return <PostItem title={title} key={title.id} />;
+function PostList({ posts }) {
+  const renderedList = posts.map((post) => {
+    return <PostItem post={post} key={post.id} />;
   });
 
-  return <div>{renderedList}</div>;
+  return <div>{renderedList} </div>;
 }
 
-export default TitleList;
+export default PostList;

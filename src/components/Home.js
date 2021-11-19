@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import PostList from "./PostList";
+import PostItem from "./PostItem";
 import Loading from "./Loading";
 import axios from "axios";
 import NavvBar from "./NavvBar";
 
 function Home() {
   const [post, setPost] = useState(null);
+  const url = "https://jsonplaceholder.typicode.com/posts/";
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
+    axios.get(url).then((res) => {
       console.log(res.data);
       setPost(res.data);
     });
-  });
+  }, []);
 
   return (
     <div>
       <NavvBar />
-      {post ? <PostList titles={post} /> : <Loading />}
+      {post ? <PostList posts={post} /> : <Loading />}
     </div>
   );
 }
