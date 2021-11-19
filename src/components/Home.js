@@ -9,7 +9,7 @@ function Home() {
   const [post, setPost] = useState(null);
   const url = "https://jsonplaceholder.typicode.com/posts/";
   useEffect(() => {
-    axios.get(url).then((res) => {
+    axios.get(url, { params: { _limit: 9 } }).then((res) => {
       console.log(res.data);
       setPost(res.data);
     });
